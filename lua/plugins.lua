@@ -4,8 +4,6 @@ return require('packer').startup(function(use)
 
     use 'nvim-treesitter/playground'
 
-    use 'folke/todo-comments.nvim'
-
     -- Autocompletion plugin
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-nvim-lsp'
@@ -29,19 +27,32 @@ return require('packer').startup(function(use)
     }
 
     use {
-        "folke/which-key.nvim",
+        'folke/which-key.nvim',
         config = function()
             vim.o.timeout = true
             vim.o.timeoutlen = 300
-            require("which-key").setup {}
+            require('which-key').setup {}
         end
     }
 
     use {
         'nvim-telescope/telescope.nvim',
-        requires = { { 'nvim-lua/plenary.nvim' } }
+        requires = 'nvim-lua/plenary.nvim',
+        config = function()
+            require('telescope').setup {}
+        end
     }
-    require('telescope')
+
+    use {
+        'folke/todo-comments.nvim',
+        requires = 'nvim-lua/plenary.nvim',
+        config = function()
+            require('todo-comments').setup({
+                signs = false,
+            })
+        end
+    }
+
 
     use 'windwp/nvim-autopairs'
 
@@ -72,5 +83,5 @@ return require('packer').startup(function(use)
     -- require('everforest').load()
 
     use 'aktersnurra/no-clown-fiesta.nvim'
-    vim.cmd[[colorscheme no-clown-fiesta]]
+    vim.cmd [[colorscheme no-clown-fiesta]]
 end)
