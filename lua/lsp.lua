@@ -7,7 +7,8 @@ local lspconfig = require('lspconfig')
 local on_attach = function(_, bufnr)
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    -- Sets up all of the keybindings that we will need for navigating the code and using features like getting documentation tooltips or quick actions.
+    -- Sets up all of the keybindings that we will need for navigating the code and using features 
+    -- like getting documentation tooltips or quick actions.
     local opts = { noremap = true, silent = true }
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
@@ -23,26 +24,9 @@ local on_attach = function(_, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>so',
     [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
-    -- vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format()' ]]
-
-
-    -- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    -- vim.lsp.diagnostic.on_publish_diagnostics, {
-    --     -- disable virtual text
-    --     virtual_text = false;
-    --
-    --     -- show signs
-    --     signs = false,
-    --
-    --     -- show_diagnostic_autocmds = { "BufWritePost" },
-    --     -- show_diagnostic_autocmds = { "InsertLeave", "CursorHoldI" },
-    --   }
-    -- )
 end
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
@@ -95,8 +79,8 @@ cmp.setup {
         end, { 'i', 's' }),
     }),
     sources = {
-        { name = 'buffer',   keyword_length = 2, max_item_count = 0 },
         { name = 'nvim_lsp', keyword_length = 2, max_item_count = 0 },
+        { name = 'buffer',   keyword_length = 5, max_item_count = 0 },
         { name = 'luasnip',  max_item_count = 0 },
         { name = 'path' },
     },
@@ -110,6 +94,7 @@ cmp.setup {
         documentation = false
     },
 }
+
 require 'cmp'.setup.cmdline(':', {
     sources = {
         { name = 'cmdline', keyword_length = 3, max_item_count = 5 }
@@ -120,6 +105,9 @@ require 'cmp'.setup.cmdline('/', {
         { name = 'buffer', keyword_length = 2, max_item_count = 5 }
     }
 })
+
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done())
 
 require 'nvim-treesitter.configs'.setup {
     -- A list of parser names, or "all"

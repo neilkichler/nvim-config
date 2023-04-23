@@ -2,18 +2,6 @@ return require('packer').startup(function(use)
     -- package manager
     use 'wbthomason/packer.nvim'
 
-    -- Configurations for Nvim LSP
-    use 'neovim/nvim-lspconfig'
-    require 'lspconfig'.clangd.setup {}
-    require 'cmp'.setup {
-        sources = {
-            { name = 'path' }
-        }
-    }
-    use {
-        'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate'
-    }
     use 'nvim-treesitter/playground'
 
     use 'folke/todo-comments.nvim'
@@ -26,6 +14,19 @@ return require('packer').startup(function(use)
     use 'hrsh7th/cmp-cmdline'      -- Cmdline autocompletion
     use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
     use 'L3MON4D3/LuaSnip'         -- Snippets plugin
+
+    -- Configurations for Nvim LSP
+    use 'neovim/nvim-lspconfig'
+    require 'lspconfig'.clangd.setup {}
+    require 'cmp'.setup {
+        sources = {
+            { name = 'path' }
+        }
+    }
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate'
+    }
 
     use {
         "folke/which-key.nvim",
@@ -66,9 +67,10 @@ return require('packer').startup(function(use)
         config = function() require('trouble').setup {} end
     }
 
-    use 'tjdevries/colorbuddy.vim'
-    use 'tjdevries/gruvbuddy.nvim'
+    -- use 'neanias/everforest-nvim'
+    -- require('everforest').setup({ background = "hard" })
+    -- require('everforest').load()
 
-    -- require('colorbuddy').colorscheme('fluorite')
-    require('colorbuddy').colorscheme('gruvbuddy')
+    use 'aktersnurra/no-clown-fiesta.nvim'
+    vim.cmd[[colorscheme no-clown-fiesta]]
 end)
