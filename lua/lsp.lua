@@ -7,7 +7,7 @@ local lspconfig = require('lspconfig')
 local on_attach = function(_, bufnr)
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    -- Sets up all of the keybindings that we will need for navigating the code and using features 
+    -- Sets up all of the keybindings that we will need for navigating the code and using features
     -- like getting documentation tooltips or quick actions.
     local opts = { noremap = true, silent = true }
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
@@ -18,7 +18,7 @@ local on_attach = function(_, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wl',
-    '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+        '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
@@ -26,7 +26,7 @@ local on_attach = function(_, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>so',
-    [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
+        [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
 end
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
@@ -39,10 +39,10 @@ for _, lsp in ipairs(servers) do
 end
 
 -- luasnip setup
-local luasnip = require 'luasnip'
+local luasnip = require('luasnip')
 
 -- nvim-cmp setup
-local cmp = require 'cmp'
+local cmp = require('cmp')
 cmp.setup {
     snippet = {
         expand = function(args)
@@ -90,24 +90,28 @@ cmp.setup {
     view = {
         entries = "wildmenu"
     },
+    completion = {
+        autocomplete = false
+    },
     window = {
         documentation = false
     },
 }
 
-require 'cmp'.setup.cmdline(':', {
+cmp.setup.cmdline(':', {
     sources = {
         { name = 'cmdline', keyword_length = 3, max_item_count = 5 }
     }
 })
-require 'cmp'.setup.cmdline('/', {
+
+cmp.setup.cmdline('/', {
     sources = {
         { name = 'buffer', keyword_length = 2, max_item_count = 5 }
     }
 })
 
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done())
+cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 
 require 'nvim-treesitter.configs'.setup {
     -- A list of parser names, or "all"

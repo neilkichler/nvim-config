@@ -55,6 +55,7 @@ return require('packer').startup(function(use)
 
 
     use 'windwp/nvim-autopairs'
+    require('nvim-autopairs').setup {}
 
     -- commenting
     use 'numToStr/Comment.nvim'
@@ -78,6 +79,7 @@ return require('packer').startup(function(use)
         config = function() require('trouble').setup {} end
     }
 
+    use 'Exafunction/codeium.vim'
     -- use 'neanias/everforest-nvim'
     -- require('everforest').setup({ background = "hard" })
     -- require('everforest').load()
