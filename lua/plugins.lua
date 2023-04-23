@@ -1,4 +1,4 @@
-return require('packer').startup(function()
+return require('packer').startup(function(use)
     -- package manager
     use 'wbthomason/packer.nvim'
 
@@ -16,6 +16,8 @@ return require('packer').startup(function()
     }
     use 'nvim-treesitter/playground'
 
+    use 'folke/todo-comments.nvim'
+
     -- Autocompletion plugin
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-nvim-lsp'
@@ -26,14 +28,20 @@ return require('packer').startup(function()
     use 'L3MON4D3/LuaSnip'         -- Snippets plugin
 
     use {
+      "folke/which-key.nvim",
+      config = function()
+        vim.o.timeout = true
+        vim.o.timeoutlen = 300
+        require("which-key").setup {} end
+    }
+
+    use {
       'nvim-telescope/telescope.nvim',
       requires = { {'nvim-lua/plenary.nvim'} }
     }
     require('telescope')    
-    use {
-        "windwp/nvim-autopairs",
-        config = function() require("nvim-autopairs").setup {} end
-    }
+
+    use 'windwp/nvim-autopairs'
 
     -- commenting
     use 'numToStr/Comment.nvim'
@@ -52,20 +60,15 @@ return require('packer').startup(function()
     })
 
     use {
-      "folke/trouble.nvim",
-      requires = "kyazdani42/nvim-web-devicons",
-      config = function()
-        require("trouble").setup {
-          -- your configuration comes here
-          -- or leave it empty to use the default settings
-          -- refer to the configuration section below
-        }
-      end
+      'folke/trouble.nvim',
+      requires = 'kyazdani42/nvim-web-devicons',
+      config = function() require('trouble').setup {} end
     }
 
-
     use 'tjdevries/colorbuddy.vim'
-    require('colorbuddy').colorscheme('fluorite')
-    -- require('colorbuddy').colorscheme('cobalt2')
+    use 'tjdevries/gruvbuddy.nvim'
+
+    -- require('colorbuddy').colorscheme('fluorite')
+    require('colorbuddy').colorscheme('gruvbuddy')
 end)
 

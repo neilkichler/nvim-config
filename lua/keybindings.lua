@@ -15,7 +15,7 @@ vim.keymap.set('n', '<leader>so',      [[<cmd>lua require('telescope.builtin').t
 vim.keymap.set('n', '<leader>?',       [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], { noremap = true, silent = true })
 
 -- Format code with <leader>f
-vim.keymap.set('n', '<leader>f',       [[<cmd>lua vim.lsp.buf.formatting()<CR>]], { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>f',       [[<cmd>lua vim.lsp.buf.format()<CR>]], { noremap = true, silent = true })
 
 -- Go to header or source c++ file
 vim.keymap.set('n', '<leader>h',       [[<cmd>ClangdSwitchSourceHeader<CR>]], { noremap = true, silent = true })
