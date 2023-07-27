@@ -26,6 +26,15 @@ return require('packer').startup(function(use)
     use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
     use 'L3MON4D3/LuaSnip'         -- Snippets plugin
 
+    use 'jose-elias-alvarez/null-ls.nvim'
+
+    use {
+        "williamboman/mason.nvim",
+        run = ":MasonUpdate" -- :MasonUpdate updates registry contents
+    }
+
+    use "williamboman/mason-lspconfig.nvim"
+
     -- Configurations for Nvim LSP
     use 'neovim/nvim-lspconfig'
     require 'lspconfig'.clangd.setup {}
@@ -51,9 +60,9 @@ return require('packer').startup(function(use)
     use {
         'nvim-telescope/telescope.nvim',
         requires = 'nvim-lua/plenary.nvim',
-        config = function()
-            require('telescope').setup {}
-        end
+        -- config = function()
+        --     require('telescope').setup {}
+        -- end
     }
 
     use {
@@ -66,7 +75,6 @@ return require('packer').startup(function(use)
         end
     }
 
-
     use 'windwp/nvim-autopairs'
     require('nvim-autopairs').setup {}
 
@@ -74,7 +82,7 @@ return require('packer').startup(function(use)
     use 'numToStr/Comment.nvim'
     require('Comment').setup({
         toggler = {
-            line = ' ;;',
+            line = ' ;',
         },
         opleader = {
             line = ' ;',
@@ -92,10 +100,7 @@ return require('packer').startup(function(use)
         config = function() require('trouble').setup {} end
     }
 
-    -- use 'Exafunction/codeium.vim'
-    -- use 'neanias/everforest-nvim'
-    -- require('everforest').setup({ background = "hard" })
-    -- require('everforest').load()
+    use 'Exafunction/codeium.vim'
 
     use 'aktersnurra/no-clown-fiesta.nvim'
     vim.cmd [[colorscheme no-clown-fiesta]]

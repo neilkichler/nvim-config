@@ -1,9 +1,6 @@
 -- Remove the highlight after searching for text.
 vim.o.hlsearch      = false
 
--- Enable mouse mode.
-vim.o.mouse         = 'a'
-
 -- Enable break indent.
 vim.o.breakindent   = true
 
