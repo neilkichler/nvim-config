@@ -1,107 +1,136 @@
-local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
-    return true
-  end
-  return false
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
 end
+vim.opt.rtp:prepend(lazypath)
 
-local packer_bootstrap = ensure_packer()
+-- Space as leader key.
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
-return require('packer').startup(function(use)
-    -- package manager
-    use 'wbthomason/packer.nvim'
+local plugins = {
 
-    use 'nvim-treesitter/playground'
+    'nvim-treesitter/playground',
+    'folke/which-key.nvim',
+    'windwp/nvim-autopairs',
 
-    -- Autocompletion plugin
-    use 'hrsh7th/nvim-cmp'
-    use 'hrsh7th/cmp-nvim-lsp'
-    use 'hrsh7th/cmp-path'         -- Path autocompletion
-    use 'hrsh7th/cmp-buffer'       -- Buffer autocompletion
-    use 'hrsh7th/cmp-cmdline'      -- Cmdline autocompletion
-    use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
-    use 'L3MON4D3/LuaSnip'         -- Snippets plugin
+    {
+        -- Autocompletion plugin
+        'hrsh7th/nvim-cmp',
 
-    use 'jose-elias-alvarez/null-ls.nvim'
+        -- load cmp on InsertEnter
+        event = 'InsertEnter',
+        dependencies = {
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-path',         -- Path autocompletion
+            'hrsh7th/cmp-buffer',       -- Buffer autocompletion
+            'hrsh7th/cmp-cmdline',      -- Cmdline autocompletion
+            'saadparwaiz1/cmp_luasnip', -- Snippets source for nvim-cmp
+            {'L3MON4D3/LuaSnip', lazy = true}, -- Snippets plugin
+        },
+        opts = {
+            sources = {
+                { name = 'path' }
+            }
+        },
+    },
 
-    use {
-        "williamboman/mason.nvim",
-        run = ":MasonUpdate" -- :MasonUpdate updates registry contents
-    }
-
-    use "williamboman/mason-lspconfig.nvim"
-
-    -- Configurations for Nvim LSP
-    use 'neovim/nvim-lspconfig'
-    require 'lspconfig'.clangd.setup {}
-    require 'cmp'.setup {
-        sources = {
-            { name = 'path' }
-        }
-    }
-    use {
-        'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate'
-    }
-
-    use {
-        'folke/which-key.nvim',
+    {
+        'jose-elias-alvarez/null-ls.nvim',
         config = function()
-            vim.o.timeout = true
-            vim.o.timeoutlen = 300
-            require('which-key').setup {}
-        end
-    }
+            local null_ls = require("null-ls")
 
-    use {
-        'nvim-telescope/telescope.nvim',
-        requires = 'nvim-lua/plenary.nvim',
-        -- config = function()
-        --     require('telescope').setup {}
-        -- end
-    }
-
-    use {
-        'folke/todo-comments.nvim',
-        requires = 'nvim-lua/plenary.nvim',
-        config = function()
-            require('todo-comments').setup({
-                signs = false,
+            null_ls.setup({
+                sources = {
+                    null_ls.builtins.formatting.black,
+                },
             })
         end
-    }
+    },
 
-    use 'windwp/nvim-autopairs'
-    require('nvim-autopairs').setup {}
+    -- {
+    --     "williamboman/mason.nvim",
+    --     build = ":MasonUpdate" -- :MasonUpdate updates registry contents
+    --     config = function()
+    --         require("mason").setup()
+    --
+    --     end
+    -- },
 
-    -- commenting
-    use 'numToStr/Comment.nvim'
-    require('Comment').setup({
-        toggler = {
-            line = ' ;',
-        },
-        opleader = {
-            line = ' ;',
-        },
-        mappings = {
-            basic = true,
-            extra = false,
-            extended = false,
-        },
-    })
+    -- {
+    --     "williamboman/mason-lspconfig.nvim",
+    --     config = function()
+    --         require("mason-lspconfig").setup {
+    --             ensure_installed = { 'clangd', 'ruff_lsp', 'pyright', 'neocmake' },
+    --         }
+    --     end
+    -- },
 
-    use {
+    {
+        -- Configurations for Nvim LSP
+        'neovim/nvim-lspconfig',
+        config = function()
+            require 'lspconfig'.clangd.setup {}
+        end
+    },
+
+    {
+        'nvim-treesitter/nvim-treesitter',
+        build = ':TSUpdate'
+    },
+
+    {
+        'nvim-telescope/telescope.nvim',
+        dependencies = 'nvim-lua/plenary.nvim',
+    },
+
+    {
+        'folke/todo-comments.nvim',
+        dependencies = 'nvim-lua/plenary.nvim',
+        opts = {
+            signs = false,
+        },
+    },
+
+    {
+        -- commenting
+        'numToStr/Comment.nvim',
+        opts = {
+            toggler = {
+                line = ' ;',
+            },
+            opleader = {
+                line = ' ;',
+            },
+            mappings = {
+                basic = true,
+                extra = false,
+                extended = false,
+            },
+        },
+    },
+
+    {
         'folke/trouble.nvim',
-        requires = 'kyazdani42/nvim-web-devicons',
-        config = function() require('trouble').setup {} end
-    }
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+    },
 
-    use 'Exafunction/codeium.vim'
+    'Exafunction/codeium.vim',
 
-    use 'aktersnurra/no-clown-fiesta.nvim'
-    vim.cmd [[colorscheme no-clown-fiesta]]
-end)
+    {
+        -- colorscheme
+        'aktersnurra/no-clown-fiesta.nvim',
+        config = function()
+            vim.cmd([[colorscheme no-clown-fiesta]])
+        end
+    },
+}
+
+require('lazy').setup(plugins)

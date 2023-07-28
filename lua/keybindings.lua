@@ -1,6 +1,3 @@
--- Space as leader key.
-vim.g.mapleader = ' '
-
 local keymap = vim.keymap.set
 
 -- Format code with <leader>f
