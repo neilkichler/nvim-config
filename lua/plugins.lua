@@ -80,9 +80,9 @@ local plugins = {
                     end, { 'i', 's' }),
                 }),
                 sources = {
-                    { name = 'nvim_lsp', keyword_length = 2, max_item_count = 0 },
-                    { name = 'buffer',   keyword_length = 5, max_item_count = 0 },
-                    { name = 'luasnip',  max_item_count = 0 },
+                    { name = 'nvim_lsp', keyword_length = 2, max_item_count = 3 },
+                    { name = 'buffer',   keyword_length = 5, max_item_count = 3 },
+                    { name = 'luasnip',  max_item_count = 3 },
                     { name = 'path' },
                 },
                 experimental = {
@@ -115,37 +115,6 @@ local plugins = {
             cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
         end
     },
-
-    {
-        'jose-elias-alvarez/null-ls.nvim',
-        config = function()
-            local null_ls = require("null-ls")
-
-            null_ls.setup({
-                sources = {
-                    null_ls.builtins.formatting.black,
-                },
-            })
-        end
-    },
-
-    -- {
-    --     "williamboman/mason.nvim",
-    --     build = ":MasonUpdate" -- :MasonUpdate updates registry contents
-    --     config = function()
-    --         require("mason").setup()
-    --
-    --     end
-    -- },
-
-    -- {
-    --     "williamboman/mason-lspconfig.nvim",
-    --     config = function()
-    --         require("mason-lspconfig").setup {
-    --             ensure_installed = { 'clangd', 'ruff_lsp', 'pyright', 'neocmake' },
-    --         }
-    --     end
-    -- },
 
     {
         -- Configurations for Nvim LSP
@@ -234,6 +203,7 @@ local plugins = {
         dependencies = { 'nvim-tree/nvim-web-devicons' },
     },
 
+    -- code completion
     'Exafunction/codeium.vim',
 
     {
