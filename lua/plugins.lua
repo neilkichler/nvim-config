@@ -213,6 +213,10 @@ local plugins = {
             vim.cmd([[colorscheme no-clown-fiesta]])
         end
     },
+
+    {
+        'Civitasv/cmake-tools.nvim'
+    },
 }
 
 require('lazy').setup(plugins)
