@@ -13,7 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
 
-    'nvim-treesitter/playground',
+    -- 'nvim-treesitter/playground',
     'folke/which-key.nvim',
     'windwp/nvim-autopairs',
 
@@ -115,6 +115,7 @@ local plugins = {
     {
         -- Configurations for Nvim LSP
         'neovim/nvim-lspconfig',
+        event = { 'BufReadPre', 'BufNewFile' },
         config = function()
             require 'lspconfig'.clangd.setup {}
         end
@@ -155,8 +156,10 @@ local plugins = {
         end
     },
 
+    -- fuzzy finder
     {
         'nvim-telescope/telescope.nvim',
+        cmd = 'Telescope',
         dependencies = 'nvim-lua/plenary.nvim',
         config = function()
             -- Add fuzzy finder shortcuts.
@@ -168,8 +171,10 @@ local plugins = {
 
     },
 
+    -- commenting
     {
         'folke/todo-comments.nvim',
+        event = 'VeryLazy',
         dependencies = 'nvim-lua/plenary.nvim',
         opts = {
             signs = false,
@@ -177,8 +182,8 @@ local plugins = {
     },
 
     {
-        -- commenting
         'numToStr/Comment.nvim',
+        event = 'VeryLazy',
         opts = {
             toggler = {
                 line = ' ;',
@@ -205,6 +210,8 @@ local plugins = {
     {
         -- colorscheme
         'aktersnurra/no-clown-fiesta.nvim',
+        lazy = false,
+        priority = 1000,
         config = function()
             vim.cmd([[colorscheme no-clown-fiesta]])
         end
@@ -212,11 +219,14 @@ local plugins = {
 
     {
         'Civitasv/cmake-tools.nvim',
+        event = 'VeryLazy',
         dependencies = 'nvim-lua/plenary.nvim',
     },
 
     {
         'williamboman/mason.nvim',
+        build = ':MasonUpdate',
+        cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
         dependencies = {
             "williamboman/mason-lspconfig.nvim",
         },
@@ -255,6 +265,8 @@ local plugins = {
     },
     {
         "jay-babu/mason-nvim-dap.nvim",
+        event = "VeryLazy",
+        dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
         opts = {
             handlers = {}
         },
@@ -268,4 +280,21 @@ local plugins = {
     },
 }
 
-require('lazy').setup(plugins)
+require('lazy').setup(plugins, { 
+    performance = { 
+        rtp = { 
+            disabled_plugins = { 
+                "netrwPlugin",
+                "gzip",
+                "rplugin",
+                "spellfile",
+                "tar",
+                "tarPlugin",
+                "tohtml",
+                "tutor",
+                "zip",
+                "zipPlugin"
+            }
+        }
+    }
+})
