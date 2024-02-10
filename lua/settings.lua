@@ -1,3 +1,6 @@
+-- Space as leader key.
+vim.g.mapleader = ' '
+
 -- Remove the highlight after searching for text.
 vim.o.hlsearch      = false
 

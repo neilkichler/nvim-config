@@ -11,10 +11,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Space as leader key.
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 local plugins = {
 
     'nvim-treesitter/playground',
