@@ -30,7 +30,7 @@ vim.opt.splitbelow  = true
 vim.opt.splitright  = true
 
 -- Copy things from outside of vim.
-vim.opt.clipboard   = 'unnamed'
+vim.opt.clipboard   = 'unnamedplus'
 
 -- No wrapping of text.
 vim.wo.wrap         = false
