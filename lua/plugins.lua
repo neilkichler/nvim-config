@@ -240,6 +240,9 @@ local plugins = {
     -- Debugger
     {
         "mfussenegger/nvim-dap",
+        dependencies = { "nvim-neotest/nvim-nio" },
+    },
+    {
         "mfussenegger/nvim-dap-python",
         "theHamsta/nvim-dap-virtual-text",
     },
