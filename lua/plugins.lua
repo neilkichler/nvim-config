@@ -165,10 +165,16 @@ local plugins = {
             -- Add fuzzy finder shortcuts.
             local builtin = require('telescope.builtin')
             vim.keymap.set('n', '<leader><space>', builtin.buffers, { desc = 'Goto Buffer' })
-            vim.keymap.set('n', '<leader>s', builtin.find_files, { desc = 'Goto File' })
-            vim.keymap.set('n', '<leader>b', builtin.current_buffer_fuzzy_find, { desc = 'Find in File' })
-        end
+            vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = 'Find File' })
+            vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = 'Search Telscope Builtins' })
+            vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, { desc = 'Find in File' })
+            vim.keymap.set('n', '<leader>s/', builtin.live_grep, { desc = 'Live Grep in Open Files' })
 
+            -- Shortcut for searching your Neovim configuration files
+            vim.keymap.set('n', '<leader>sn', function()
+                builtin.find_files { cwd = vim.fn.stdpath 'config' }
+            end, { desc = 'Search Neovim config files' })
+        end
     },
 
     -- commenting

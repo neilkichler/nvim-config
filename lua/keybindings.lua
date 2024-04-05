@@ -9,7 +9,7 @@ keymap("n", "<leader>dd", "<cmd>TroubleToggle<CR>", { desc = "Toggle Diagnostics
 -- Don't accidently enter macro mode
 keymap("n", "Q", "<nop>")
 
--- Run CMake using super enter
+-- Run CMake
 keymap("n", "<leader>c", "<cmd>CMakeRun<CR>", { desc = "Run CMake" })
 
 -- Debugger set breakpoint
