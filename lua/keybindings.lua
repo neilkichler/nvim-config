@@ -1,5 +1,18 @@
 local keymap = vim.keymap.set
 
+-- Disable arrow keys
+local opts = { noremap = true, silent = true }
+keymap('', '<Up>', '<Nop>', opts)
+keymap('', '<Down>', '<Nop>', opts)
+keymap('', '<Left>', '<Nop>', opts)
+keymap('', '<Right>', '<Nop>', opts)
+
+-- Disable arrow keys in command-line mode
+keymap('c', '<Up>', '<Nop>', opts)
+keymap('c', '<Down>', '<Nop>', opts)
+keymap('c', '<Left>', '<Nop>', opts)
+keymap('c', '<Right>', '<Nop>', opts)
+
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
 --

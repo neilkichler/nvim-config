@@ -242,7 +242,7 @@ local plugins = {
         config = function()
             require("mason").setup()
             require("mason-lspconfig").setup {
-                ensure_installed = { "clangd", "pyright", "ruff_lsp" },
+                ensure_installed = { "clangd", "pyright", "ruff" },
             }
         end
     },
