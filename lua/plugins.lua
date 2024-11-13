@@ -13,7 +13,15 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
 
-    'folke/which-key.nvim',
+    {
+        'folke/which-key.nvim',
+        event = 'VeryLazy',
+        dependencies = {
+            'echasnovski/mini.nvim',
+            'nvim-tree/nvim-web-devicons'
+        }
+    },
+
     'windwp/nvim-autopairs',
 
     {
