@@ -171,8 +171,7 @@ local plugins = {
     -- fuzzy finder
     {
         'nvim-telescope/telescope.nvim',
-        cmd = 'Telescope',
-        dependencies = 'nvim-lua/plenary.nvim',
+        dependencies = { 'nvim-lua/plenary.nvim' },
         config = function()
             -- Add fuzzy finder shortcuts.
             local builtin = require('telescope.builtin')
