@@ -12,6 +12,15 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
+    {
+        -- colorscheme
+        'aktersnurra/no-clown-fiesta.nvim',
+        lazy = false,
+        priority = 1000,
+        config = function()
+            vim.cmd([[colorscheme no-clown-fiesta]])
+        end
+    },
 
     {
         'folke/which-key.nvim',
@@ -37,11 +46,6 @@ local plugins = {
             'hrsh7th/cmp-cmdline',      -- Cmdline autocompletion
             'saadparwaiz1/cmp_luasnip', -- Snippets source for nvim-cmp
             'L3MON4D3/LuaSnip',         -- Snippets plugin
-        },
-        opts = {
-            sources = {
-                { name = 'path' }
-            }
         },
         config = function()
             local luasnip = require('luasnip')
@@ -226,16 +230,6 @@ local plugins = {
     {
         -- code completion
         'Exafunction/codeium.vim',
-    },
-
-    {
-        -- colorscheme
-        'aktersnurra/no-clown-fiesta.nvim',
-        lazy = false,
-        priority = 1000,
-        config = function()
-            vim.cmd([[colorscheme no-clown-fiesta]])
-        end
     },
 
     {
