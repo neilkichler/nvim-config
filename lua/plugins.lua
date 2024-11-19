@@ -131,6 +131,7 @@ local plugins = {
     {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
+        event = { 'BufReadPost', 'BufWritePost', 'BufNewFile', 'VeryLazy' },
         config = function()
             require 'nvim-treesitter.configs'.setup {
                 -- A list of parser names, or "all"
@@ -218,11 +219,14 @@ local plugins = {
 
     {
         'folke/trouble.nvim',
+        event = 'VeryLazy',
         dependencies = { 'nvim-tree/nvim-web-devicons' },
     },
 
-    -- code completion
-    'Exafunction/codeium.vim',
+    {
+        -- code completion
+        'Exafunction/codeium.vim',
+    },
 
     {
         -- colorscheme
@@ -242,6 +246,7 @@ local plugins = {
 
     {
         'williamboman/mason.nvim',
+        event = 'VeryLazy',
         build = ':MasonUpdate',
         dependencies = {
             "williamboman/mason-lspconfig.nvim",
@@ -256,8 +261,9 @@ local plugins = {
 
     -- Latex
     {
-        "lervag/vimtex",
-        lazy = false,     -- we don't want to lazy load VimTeX
+        'lervag/vimtex',
+        event = 'VeryLazy',
+        -- lazy = false,     -- we don't want to lazy load VimTeX
         init = function()
             -- VimTeX configuration goes here
         end
@@ -266,11 +272,16 @@ local plugins = {
     -- Debugger
     {
         "mfussenegger/nvim-dap",
+        event = "VeryLazy",
         dependencies = { "nvim-neotest/nvim-nio" },
     },
     {
         "mfussenegger/nvim-dap-python",
+        event = "VeryLazy",
+    },
+    {
         "theHamsta/nvim-dap-virtual-text",
+        event = "VeryLazy",
     },
     {
         "rcarriga/nvim-dap-ui",
