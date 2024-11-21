@@ -127,9 +127,6 @@ local plugins = {
         -- Configurations for Nvim LSP
         'neovim/nvim-lspconfig',
         event = { 'BufReadPre', 'BufNewFile' },
-        config = function()
-            require 'lspconfig'.clangd.setup {}
-        end
     },
 
     {
@@ -223,8 +220,20 @@ local plugins = {
 
     {
         'folke/trouble.nvim',
-        event = 'VeryLazy',
         dependencies = { 'nvim-tree/nvim-web-devicons' },
+        opts = {
+            focus = true,
+            warn_no_results = false,
+            open_no_results = true
+        },
+        cmd = "Trouble",
+        keys = {
+            {
+              "<leader>dd",
+              "<cmd>Trouble diagnostics toggle<cr>",
+              desc = "Toggle Diagnostics Panel",
+            },
+        }
     },
 
     {

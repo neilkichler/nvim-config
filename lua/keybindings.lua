@@ -25,9 +25,6 @@ keymap('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 -- Format code with <leader>f
 keymap("n", "<leader>f", vim.lsp.buf.format, { desc = "Format" })
 
--- Toggle Diagnostics Panel
-keymap("n", "<leader>dd", "<cmd>TroubleToggle<CR>", { desc = "Toggle Diagnostics" })
-
 -- Don't accidently enter macro mode
 keymap("n", "Q", "<nop>")
 
