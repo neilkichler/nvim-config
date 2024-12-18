@@ -29,6 +29,21 @@ vim.o.autoread      = true
 vim.o.splitbelow    = true
 vim.o.splitright    = true
 
+-- It takes forever on WSL2 to load the clipboard.
+-- Define it upfront so neovim doesn't need to search for it.
+vim.g.clipboard     = {
+    name = 'win32yank',
+    copy = {
+        ["+"] = 'win32yank.exe -i --crlf',
+        ["*"] = 'win32yank.exe -i --crlf',
+    },
+    paste = {
+        ["+"] = 'win32yank.exe -o --lf',
+        ["*"] = 'win32yank.exe -o --lf',
+    },
+    cache_enabled = 1,
+}
+
 -- Copy things from outside of vim.
 vim.o.clipboard     = 'unnamedplus'
 
