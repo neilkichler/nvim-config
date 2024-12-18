@@ -1,5 +1,5 @@
 -- Space as leader key.
-vim.g.mapleader = ' '
+vim.g.mapleader     = ' '
 
 -- Remove the highlight after searching for text.
 vim.o.hlsearch      = false
@@ -18,19 +18,19 @@ vim.o.updatetime    = 250
 vim.o.termguicolors = true
 
 -- Save undo history.
-vim.opt.undofile    = true
+vim.o.undofile      = true
 
 -- Tab settings.
-vim.opt.tabstop     = 4
-vim.opt.shiftwidth  = 4
-vim.opt.softtabstop = 4
-vim.opt.expandtab   = true
-vim.opt.autoread    = true
-vim.opt.splitbelow  = true
-vim.opt.splitright  = true
+vim.o.tabstop       = 4
+vim.o.shiftwidth    = 4
+vim.o.softtabstop   = 4
+vim.o.expandtab     = true
+vim.o.autoread      = true
+vim.o.splitbelow    = true
+vim.o.splitright    = true
 
 -- Copy things from outside of vim.
-vim.opt.clipboard   = 'unnamedplus'
+vim.o.clipboard     = 'unnamedplus'
 
 -- No wrapping of text.
 vim.wo.wrap         = false
