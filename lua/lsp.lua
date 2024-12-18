@@ -2,51 +2,55 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-local lspconfig = require('lspconfig')
-
 local on_attach = function(_, bufnr)
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    local opts = { noremap = true, silent = true }
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>r', '<cmd>lua vim.lsp.buf.rename()<CR>', { desc = 'Rename' })
+    local nmap = function(keys, func, desc)
+        vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+    end
+
+    nmap('gD', vim.lsp.buf.declaration, 'Goto Declaration')
+    nmap('gd', require('telescope.builtin').lsp_definitions, 'Goto Definition')
+    nmap('gi', require('telescope.builtin').lsp_implementations, 'Goto Implementation')
+    nmap('gr', require('telescope.builtin').lsp_references, 'Goto References')
+    nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+    nmap('<leader>r', vim.lsp.buf.rename, 'Rename')
 end
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'clangd', 'cmake', 'ruff', 'pyright' }
-for _, lsp in ipairs(servers) do
-    lspconfig[lsp].setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-    }
-end
+local servers = {
+    clangd = {},
+    cmake = {},
+    ruff = {},
+    pyright = {},
+    lua_ls = {
+        Lua = {
+            workspace = { checkThirdParty = false },
+            telemetry = { enable = false },
+            diagnostics = { disable = { 'missing-fields' } },
+        },
+    },
+}
 
--- local dap = require('dap')
--- dap.adapters.codelldb = {
---     type = 'server',
---     port = "${port}",
---     executable = {
---         -- command = '/home/neil/.local/share/nvim/mason/bin/codelldb',
---         command = 'C:\\Users\\Neil\\AppData\\Local\\nvim-data\\mason\\bin\\codelldb',
---         args = { "--port", "${port}" },
---     }
--- }
---
--- dap.configurations.cpp = {
---     {
---         name = "C++ Debug and Run",
---         type = "codelldb",
---         request = "launch",
---         program = function()
---             return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
---         end,
---         cwd = '${workspaceFolder}',
---         stopOnEntry = false,
---         runInTerminal = true,
---         console = "integratedTerminal",
---     },
--- }
+-- mason-lspconfig requires that these setup functions are called in this order
+-- before setting up the servers.
+require('mason').setup()
+require('mason-lspconfig').setup()
+
+-- Ensure the servers above are installed
+local mason_lspconfig = require 'mason-lspconfig'
+
+mason_lspconfig.setup {
+    ensure_installed = vim.tbl_keys(servers),
+}
+
+mason_lspconfig.setup_handlers {
+    function(server_name)
+        require('lspconfig')[server_name].setup {
+            capabilities = capabilities,
+            on_attach = on_attach,
+            settings = servers[server_name],
+            filetypes = (servers[server_name] or {}).filetypes,
+        }
+    end
+}

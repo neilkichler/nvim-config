@@ -31,9 +31,9 @@ local plugins = {
         opts = {},
         keys = {
             {
-              "-",
-              "<cmd>Oil<cr>",
-              desc = "Open File Explorer [Oil]",
+                "-",
+                "<cmd>Oil<cr>",
+                desc = "Open File Explorer [Oil]",
             },
         },
         dependencies = { { "echasnovski/mini.icons", opts = {} } },
@@ -122,7 +122,7 @@ local plugins = {
                     autocomplete = false
                 },
                 window = {
-                    documentation = false
+                    documentation = nil
                 },
             }
 
@@ -147,6 +147,21 @@ local plugins = {
         -- Configurations for Nvim LSP
         'neovim/nvim-lspconfig',
         event = { 'BufReadPre', 'BufNewFile' },
+        dependencies = {
+            'williamboman/mason.nvim',
+            'williamboman/mason-lspconfig.nvim',
+            {
+                "folke/lazydev.nvim",
+                ft = "lua", -- only load on lua files
+                opts = {
+                    library = {
+                        -- See the configuration section for more details
+                        -- Load luvit types when the `vim.uv` word is found
+                        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+                    },
+                },
+            },
+        }
     },
 
     {
@@ -249,9 +264,9 @@ local plugins = {
         cmd = "Trouble",
         keys = {
             {
-              "<leader>dd",
-              "<cmd>Trouble diagnostics toggle<cr>",
-              desc = "Toggle Diagnostics Panel",
+                "<leader>dd",
+                "<cmd>Trouble diagnostics toggle<cr>",
+                desc = "Toggle Diagnostics Panel",
             },
         }
     },
@@ -265,21 +280,6 @@ local plugins = {
         'Civitasv/cmake-tools.nvim',
         event = 'VeryLazy',
         dependencies = 'nvim-lua/plenary.nvim',
-    },
-
-    {
-        'williamboman/mason.nvim',
-        event = 'VeryLazy',
-        build = ':MasonUpdate',
-        dependencies = {
-            "williamboman/mason-lspconfig.nvim",
-        },
-        config = function()
-            require("mason").setup()
-            require("mason-lspconfig").setup {
-                ensure_installed = { "clangd", "pyright", "ruff", "cmake" },
-            }
-        end
     },
 
     -- Latex
@@ -341,10 +341,10 @@ local plugins = {
     },
 }
 
-require('lazy').setup(plugins, { 
-    performance = { 
-        rtp = { 
-            disabled_plugins = { 
+require('lazy').setup(plugins, {
+    performance = {
+        rtp = {
+            disabled_plugins = {
                 "netrwPlugin",
                 "gzip",
                 "rplugin",
