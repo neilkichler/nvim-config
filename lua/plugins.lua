@@ -23,6 +23,26 @@ local plugins = {
     },
 
     {
+        'echasnovski/mini.nvim', version = '*',
+    },
+
+    {
+        'stevearc/oil.nvim',
+        opts = {},
+        keys = {
+            {
+              "-",
+              "<cmd>Oil<cr>",
+              desc = "Open File Explorer [Oil]",
+            },
+        },
+        dependencies = { { "echasnovski/mini.icons", opts = {} } },
+        config = function()
+            require('oil').setup()
+        end
+    },
+
+    {
         'folke/which-key.nvim',
         event = 'VeryLazy',
         dependencies = {
@@ -271,7 +291,6 @@ local plugins = {
             -- VimTeX configuration goes here
         end
     },
- 
     -- Debugger
     {
         "mfussenegger/nvim-dap",
