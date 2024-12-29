@@ -1,6 +1,6 @@
--- Add additional capabilities supported by nvim-cmp
+-- Add additional capabilities supported by blink
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
 
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)

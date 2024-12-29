@@ -23,7 +23,13 @@ local plugins = {
     },
 
     {
-        'echasnovski/mini.nvim', version = '*',
+        'echasnovski/mini.nvim',
+        version = '*',
+        config = function()
+            require('mini.icons').setup({
+                style = 'ascii'
+            })
+        end
     },
 
     {
@@ -36,7 +42,7 @@ local plugins = {
                 desc = "Open File Explorer [Oil]",
             },
         },
-        dependencies = { { "echasnovski/mini.icons", opts = {} } },
+        dependencies = { { "echasnovski/mini.icons", opts = { style = 'ascii' } } },
         config = function()
             require('oil').setup()
         end
@@ -45,102 +51,48 @@ local plugins = {
     {
         'folke/which-key.nvim',
         event = 'VeryLazy',
-        dependencies = {
-            'echasnovski/mini.nvim',
-            'nvim-tree/nvim-web-devicons'
+        opts = {
+            icons = {
+                mappings = false,
+                rules = false,
+                keys = {
+                    Space = "⎵ ",
+                }
+            },
+            show_help = false
         }
     },
 
     'windwp/nvim-autopairs',
 
     {
-        -- Autocompletion plugin
-        'hrsh7th/nvim-cmp',
+        'saghen/blink.cmp',
+        dependencies = 'rafamadriz/friendly-snippets',
+        version = '*',
+        opts = {
+            keymap = { preset = 'super-tab' },
+            completion = {
+                menu = {
+                    -- Don't automatically show the completion menu in some scenarios
+                    auto_show = function(ctx)
+                        return not vim.tbl_contains({ '/', '?' }, vim.fn.getcmdtype())
+                            and not vim.tbl_contains({ 'c', 'cpp', 'python' }, vim.bo.filetype)
+                            and vim.b.completion ~= false
+                            or ctx.mode == 'cmdline'
+                    end
+                },
 
-        -- load cmp on InsertEnter
-        event = 'InsertEnter',
-        dependencies = {
-            'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-path',         -- Path autocompletion
-            'hrsh7th/cmp-buffer',       -- Buffer autocompletion
-            'hrsh7th/cmp-cmdline',      -- Cmdline autocompletion
-            'saadparwaiz1/cmp_luasnip', -- Snippets source for nvim-cmp
-            'L3MON4D3/LuaSnip',         -- Snippets plugin
+                -- Display a preview of the selected item on the current line
+                ghost_text = { enabled = true },
+            },
+            sources = {
+                default = { 'lsp', 'path', 'snippets', 'buffer' },
+                min_keyword_length = function (ctx)
+                    return ctx.mode == 'cmdline' and 3 or 0
+                end
+            },
+            -- signature = { enabled = true }
         },
-        config = function()
-            local luasnip = require('luasnip')
-            -- nvim-cmp setup
-            local cmp = require('cmp')
-            cmp.setup {
-                snippet = {
-                    expand = function(args)
-                        luasnip.lsp_expand(args.body)
-                    end,
-                },
-                mapping = cmp.mapping.preset.insert({
-                    ['<C-j>'] = cmp.mapping.select_next_item(),
-                    ['<C-k>'] = cmp.mapping.select_prev_item(),
-                    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-                    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-                    ['<C-Space>'] = cmp.mapping.complete(),
-                    ['<CR>'] = cmp.mapping.confirm {
-                        behavior = cmp.ConfirmBehavior.Replace,
-                        select = true,
-                    },
-                    ['<Tab>'] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_next_item()
-                        elseif luasnip.expand_or_jumpable() then
-                            luasnip.expand_or_jump()
-                        else
-                            fallback()
-                        end
-                    end, { 'i', 's' }),
-                    ['<S-Tab>'] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_prev_item()
-                        elseif luasnip.jumpable(-1) then
-                            luasnip.jump(-1)
-                        else
-                            fallback()
-                        end
-                    end, { 'i', 's' }),
-                }),
-                sources = {
-                    { name = 'nvim_lsp', keyword_length = 2, max_item_count = 3 },
-                    { name = 'buffer',   keyword_length = 5, max_item_count = 3 },
-                    { name = 'luasnip',  max_item_count = 3 },
-                    { name = 'path' },
-                },
-                experimental = {
-                    ghost_text = true
-                },
-                view = {
-                    entries = "wildmenu"
-                },
-                completion = {
-                    autocomplete = false
-                },
-                window = {
-                    documentation = nil
-                },
-            }
-
-            cmp.setup.cmdline(':', {
-                sources = {
-                    { name = 'cmdline', keyword_length = 3, max_item_count = 5 }
-                }
-            })
-
-            cmp.setup.cmdline('/', {
-                sources = {
-                    { name = 'buffer', keyword_length = 2, max_item_count = 5 }
-                }
-            })
-
-            local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-            cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
-        end
     },
 
     {
@@ -150,6 +102,7 @@ local plugins = {
         dependencies = {
             'williamboman/mason.nvim',
             'williamboman/mason-lspconfig.nvim',
+            'saghen/blink.cmp',
             {
                 "folke/lazydev.nvim",
                 ft = "lua", -- only load on lua files
@@ -264,17 +217,24 @@ local plugins = {
         cmd = "Trouble",
         keys = {
             {
-                "<leader>dd",
+                "<leader>xx",
                 "<cmd>Trouble diagnostics toggle<cr>",
                 desc = "Toggle Diagnostics Panel",
             },
         }
     },
 
-    {
-        -- code completion
-        'Exafunction/codeium.vim',
-    },
+    -- {
+    --     -- code completion
+    --     "Exafunction/codeium.nvim",
+    --     dependencies = {
+    --         "nvim-lua/plenary.nvim",
+    --         "hrsh7th/nvim-cmp",
+    --     },
+    --     config = function()
+    --         require("codeium").setup({})
+    --     end
+    -- },
 
     {
         'Civitasv/cmake-tools.nvim',
