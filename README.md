@@ -1,11 +1,11 @@
-# System Requirements
+# Neovim Configuration
 ## Installing Neovim
 See https://github.com/neovim/neovim/blob/master/INSTALL.md
 
-## Installing Mason dependency managers
+## Using Mason dependency manager
 The [mason](https://github.com/mason-org/mason.nvim) package manager is used to install various lsp/linters/formatters.
 
-It requires the system to have:
+It has some system [requirements](https://github.com/mason-org/mason.nvim?tab=readme-ov-file#requirements), e.g.:
 
 `python`, `pip` (for ruff, etc.)
 
