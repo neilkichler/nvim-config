@@ -3,9 +3,13 @@
 See https://github.com/neovim/neovim/blob/master/INSTALL.md
 
 ## Installing Mason dependency managers
-python, pip (for ruff, etc.)
+The [mason](https://github.com/mason-org/mason.nvim) package manager is used to install various lsp/linters/formatters.
 
-npm (for pyright)
+It requires the system to have:
+
+`python`, `pip` (for ruff, etc.)
+
+`npm` (for pyright)
 
 # Deployment
 ## Unix-like
