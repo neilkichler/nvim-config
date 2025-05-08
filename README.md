@@ -1,4 +1,6 @@
 # Neovim Configuration
+My config supporting C++ and Python development by default.
+
 ## Installing Neovim
 See https://github.com/neovim/neovim/blob/master/INSTALL.md
 
