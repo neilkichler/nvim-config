@@ -21,7 +21,7 @@ local servers = {
     clangd = {},
     cmake = {},
     ruff = {},
-    pyright = {},
+    -- pyright = {},
     lua_ls = {
         Lua = {
             workspace = { checkThirdParty = false },
@@ -53,3 +53,7 @@ mason_lspconfig.setup_handlers {
         }
     end
 }
+
+-- TODO: switch to new builtin lsp support
+--
+-- vim.lsp.enable({'clangd','cmake','ruff'})

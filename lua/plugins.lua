@@ -100,8 +100,8 @@ local plugins = {
         'neovim/nvim-lspconfig',
         event = { 'BufReadPre', 'BufNewFile' },
         dependencies = {
-            'williamboman/mason.nvim',
-            'williamboman/mason-lspconfig.nvim',
+            { 'williamboman/mason.nvim', version = '1.*' },
+            { 'williamboman/mason-lspconfig.nvim', version = '1.*' },
             'saghen/blink.cmp',
             {
                 "folke/lazydev.nvim",
@@ -236,11 +236,11 @@ local plugins = {
     --     end
     -- },
 
-    {
-        'Civitasv/cmake-tools.nvim',
-        event = 'VeryLazy',
-        dependencies = 'nvim-lua/plenary.nvim',
-    },
+    -- {
+    --     'Civitasv/cmake-tools.nvim',
+    --     event = 'VeryLazy',
+    --     dependencies = 'nvim-lua/plenary.nvim',
+    -- },
 
     -- Latex
     {
