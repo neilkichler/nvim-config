@@ -33,6 +33,7 @@ local plugins = {
     },
 
     {
+        -- file explorer
         'stevearc/oil.nvim',
         opts = {},
         keys = {
