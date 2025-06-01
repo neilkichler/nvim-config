@@ -87,7 +87,7 @@ local plugins = {
             },
             sources = {
                 default = { 'lsp', 'path', 'snippets', 'buffer' },
-                min_keyword_length = function (ctx)
+                min_keyword_length = function(ctx)
                     return ctx.mode == 'cmdline' and 3 or 0
                 end
             },
@@ -96,12 +96,18 @@ local plugins = {
     },
 
     {
+        'mason-org/mason.nvim',
+        version = '2.*',
+        opts = {}
+    },
+
+    {
         -- Configurations for Nvim LSP
         'neovim/nvim-lspconfig',
         event = { 'BufReadPre', 'BufNewFile' },
         dependencies = {
-            { 'williamboman/mason.nvim', version = '1.*' },
-            { 'williamboman/mason-lspconfig.nvim', version = '1.*' },
+            { 'mason-org/mason.nvim',           version = '2.*' },
+            { 'mason-org/mason-lspconfig.nvim', version = '2.*' },
             'saghen/blink.cmp',
             {
                 "folke/lazydev.nvim",
@@ -114,7 +120,13 @@ local plugins = {
                     },
                 },
             },
-        }
+        },
+        config = function()
+            -- mason-lspconfig requires that these setup functions are called in this order
+            -- before setting up the servers.
+            require('mason').setup()
+            require('mason-lspconfig').setup()
+        end
     },
 
     {

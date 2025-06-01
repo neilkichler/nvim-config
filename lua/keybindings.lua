@@ -22,14 +22,28 @@ keymap('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 keymap('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 keymap('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
--- Format code with <leader>f
-keymap("n", "<leader>f", vim.lsp.buf.format, { desc = "Format" })
-
 -- Don't accidently enter macro mode
 keymap("n", "Q", "<nop>")
 
 -- Run CMake
 keymap("n", "<leader>c", "<cmd>CMakeRun<CR>", { desc = "Run CMake" })
+
+-- Activate LSP keybindings when an LSP attaches to a particular buffer
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(event)
+        local nmap = function(keys, func, desc)
+            vim.keymap.set('n', keys, func, { buffer = event.buf, desc = desc })
+        end
+
+        nmap('gD', vim.lsp.buf.declaration, 'Goto Declaration')
+        nmap('gd', vim.lsp.buf.definition, 'Goto Definition')
+        nmap('gi', vim.lsp.buf.implementation, 'Goto Implementation')
+        nmap('gr', vim.lsp.buf.references, 'Goto References')
+        nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+        nmap('<leader>r', vim.lsp.buf.rename, 'Rename')
+        nmap('<leader>f', vim.lsp.buf.format, 'Format')
+    end,
+})
 
 -- Debugger set breakpoint
 keymap("n", "<leader>db", "<cmd>DapToggleBreakpoint<CR>", { desc = "Add breakpoint at line" })
