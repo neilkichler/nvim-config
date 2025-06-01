@@ -329,5 +329,8 @@ require('lazy').setup(plugins, {
                 "zipPlugin"
             }
         }
+    },
+    rocks = {
+        enabled = false
     }
 })
