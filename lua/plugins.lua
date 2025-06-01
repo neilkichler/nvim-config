@@ -88,10 +88,9 @@ local plugins = {
             sources = {
                 default = { 'lsp', 'path', 'snippets', 'buffer' },
                 min_keyword_length = function(ctx)
-                    return ctx.mode == 'cmdline' and 3 or 0
+                    return ctx.mode == 'cmdline' and 3 or 5
                 end
             },
-            -- signature = { enabled = true }
         },
     },
 
