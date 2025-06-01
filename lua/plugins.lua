@@ -190,31 +190,13 @@ local plugins = {
         end
     },
 
-    -- commenting
+    -- comment highlighting of TODO, NOTE, etc.
     {
         'folke/todo-comments.nvim',
         event = 'VeryLazy',
         dependencies = 'nvim-lua/plenary.nvim',
         opts = {
             signs = false,
-        },
-    },
-
-    {
-        'numToStr/Comment.nvim',
-        event = 'VeryLazy',
-        opts = {
-            toggler = {
-                line = ' ;',
-            },
-            opleader = {
-                line = ' ;',
-            },
-            mappings = {
-                basic = true,
-                extra = false,
-                extended = false,
-            },
         },
     },
 
