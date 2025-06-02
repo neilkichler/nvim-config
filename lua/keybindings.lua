@@ -22,6 +22,9 @@ keymap('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 keymap('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 keymap('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+-- exit terminal mode
+keymap('t', '<leader><Esc>', [[<C-\><C-n>]], opts)
+
 -- Don't accidently enter macro mode
 keymap("n", "Q", "<nop>")
 
