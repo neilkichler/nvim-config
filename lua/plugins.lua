@@ -164,20 +164,18 @@ local plugins = {
     {
         'nvim-telescope/telescope.nvim',
         dependencies = { 'nvim-lua/plenary.nvim' },
-        config = function()
-            -- Add fuzzy finder shortcuts.
-            local builtin = require('telescope.builtin')
-            vim.keymap.set('n', '<leader><space>', builtin.buffers, { desc = 'Goto Buffer' })
-            vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = 'Find File' })
-            vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = 'Search Telscope Builtins' })
-            vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, { desc = 'Find in File' })
-            vim.keymap.set('n', '<leader>s/', builtin.live_grep, { desc = 'Live Grep in Open Files' })
-
-            -- Shortcut for searching your Neovim configuration files
-            vim.keymap.set('n', '<leader>sn', function()
-                builtin.find_files { cwd = vim.fn.stdpath 'config' }
-            end, { desc = 'Search Neovim config files' })
-        end
+        keys = {
+            { '<leader><space>', '<cmd>Telescope buffers<cr>',                   desc = 'Goto Buffer' },
+            { '<leader>sf',      '<cmd>Telescope find_files<cr>',                desc = 'Find File' },
+            { '<leader>ss',      '<cmd>Telescope builtin<cr>',                   desc = 'Search Telescope Builtins' },
+            { '<leader>/',       '<cmd>Telescope current_buffer_fuzzy_find<cr>', desc = 'Find in File' },
+            { '<leader>s?',      '<cmd>Telescope live_grep<cr>',                 desc = 'Live Grep in Open Files' },
+            {
+                '<leader>sn',
+                '<cmd>Telescope find_files cwd=' .. vim.fn.stdpath('config') .. '<cr>',
+                desc = 'Search Neovim config files'
+            },
+        },
     },
 
     -- comment highlighting of TODO, NOTE, etc.
