@@ -46,7 +46,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         nmap('gd', vim.lsp.buf.definition, 'Goto Definition')
         nmap('gi', vim.lsp.buf.implementation, 'Goto Implementation')
         nmap('gr', vim.lsp.buf.references, 'Goto References')
-        nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+        nmap('<leader>i', vim.lsp.buf.hover, 'Hover Documentation')
         nmap('<leader>r', vim.lsp.buf.rename, 'Rename')
         nmap('<leader>f', vim.lsp.buf.format, 'Format')
     end,
