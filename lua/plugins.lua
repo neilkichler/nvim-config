@@ -23,16 +23,6 @@ local plugins = {
     },
 
     {
-        'echasnovski/mini.nvim',
-        version = '*',
-        config = function()
-            require('mini.icons').setup({
-                style = 'ascii'
-            })
-        end
-    },
-
-    {
         -- file explorer
         'stevearc/oil.nvim',
         opts = {},
