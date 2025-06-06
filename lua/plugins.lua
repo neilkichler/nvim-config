@@ -192,10 +192,10 @@ local plugins = {
         event = 'VeryLazy',
         opts = {
             toggler = {
-                line = ' ;',
+                line = '<leader>;',
             },
             opleader = {
-                line = ' ;',
+                line = '<leader>;',
             },
             mappings = {
                 basic = true,
