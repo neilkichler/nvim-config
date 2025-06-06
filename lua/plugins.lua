@@ -187,7 +187,23 @@ local plugins = {
             signs = false,
         },
     },
-
+    {
+        'numToStr/Comment.nvim',
+        event = 'VeryLazy',
+        opts = {
+            toggler = {
+                line = ' ;',
+            },
+            opleader = {
+                line = ' ;',
+            },
+            mappings = {
+                basic = true,
+                extra = false,
+                extended = false,
+            },
+        },
+    },
     {
         'folke/trouble.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons' },

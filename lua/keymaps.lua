@@ -31,10 +31,6 @@ keymap("n", "Q", "<nop>")
 -- Run CMake
 keymap("n", "<leader>c", "<cmd>CMakeRun<CR>", { desc = "Run CMake" })
 
--- Commenting lines remapped to <leader>;
-keymap('x', '<leader>;', 'gc', { remap = true, desc = 'Toggle Comment' })
-keymap('n', '<leader>;', 'gcc', { remap = true, desc = 'Toggle Comment' })
-
 -- Activate LSP keybindings when an LSP attaches to a particular buffer
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(event)
