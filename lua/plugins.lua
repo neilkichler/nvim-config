@@ -165,6 +165,7 @@ local plugins = {
             { '<leader><space>', '<cmd>Telescope buffers<cr>',                   desc = 'Goto Buffer' },
             { '<leader>sf',      '<cmd>Telescope find_files<cr>',                desc = 'Find File' },
             { '<leader>ss',      '<cmd>Telescope builtin<cr>',                   desc = 'Search Telescope Builtins' },
+            { '<leader>sd',      '<cmd>Telescope diagnostics<cr>',               desc = 'Search Diagnostics' },
             { '<leader>/',       '<cmd>Telescope current_buffer_fuzzy_find<cr>', desc = 'Find in File' },
             { '<leader>s?',      '<cmd>Telescope live_grep<cr>',                 desc = 'Live Grep in Open Files' },
             {
