@@ -19,18 +19,18 @@ The default configuration location is: `~/.config/nvim`.
 
 Go into `.config` and clone the repo into folder `nvim`
 ```bash
-cd ~/.config && git clone git@github.com:neilkichler/nvim-config.git nvim
+cd ~/.config && git clone https://github.com/neilkichler/nvim-config.git nvim
 ```
 ## Windows
 The default configuration location is: `%USERPROFILE%\AppData\Local`.
 
 ### Command Prompt
 ```
-cd %USERPROFILE%\AppData\Local &&  git clone git@github.com:neilkichler/nvim-config.git nvim
+cd %USERPROFILE%\AppData\Local &&  git clone https://github.com/neilkichler/nvim-config.git nvim
 ```
 ### or via Powershell
 ```powershell
-cd $env:userprofile\AppData\Local; git clone git@github.com:neilkichler/nvim-config.git nvim
+cd $env:userprofile\AppData\Local; git clone https://github.com/neilkichler/nvim-config.git nvim
 ``` 
 
 # Installation
