@@ -53,7 +53,7 @@ keymap("n", "<leader>q",
     end
     , { desc = "Toggle Quickfix List" })
 
--- exit terminal mode
+-- Exit terminal mode
 keymap('t', '<leader><Esc>', [[<C-\><C-n>]], opts)
 
 -- Don't accidently enter macro mode
