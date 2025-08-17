@@ -53,9 +53,6 @@ vim.o.clipboard = 'unnamedplus'
 -- No wrapping of text.
 vim.wo.wrap     = false
 
--- Show <tab> and trailing spaces
-vim.o.list = true
-
 vim.diagnostic.config {
     signs = false,
     virtual_text = false,
