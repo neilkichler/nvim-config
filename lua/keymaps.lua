@@ -37,6 +37,22 @@ end
 keymap("n", "<M-j>", diagnostic_jump(1), { desc = "Jump to next diagnostic" })
 keymap("n", "<M-k>", diagnostic_jump(-1), { desc = "Jump to prev diagnostic" })
 
+-- Toggle Quickfix list
+keymap("n", "<leader>q",
+    function()
+        local wins = vim.fn.getwininfo()
+        for _, win in ipairs(wins) do
+            if win.quickfix == 1 then
+                vim.cmd("cclose")
+                return
+            end
+        end
+        local curwin = vim.api.nvim_get_current_win()
+        vim.cmd("copen")
+        vim.api.nvim_set_current_win(curwin)
+    end
+    , { desc = "Toggle Quickfix List" })
+
 -- exit terminal mode
 keymap('t', '<leader><Esc>', [[<C-\><C-n>]], opts)
 
