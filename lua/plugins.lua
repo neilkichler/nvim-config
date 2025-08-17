@@ -40,6 +40,7 @@ local plugins = {
     },
 
     {
+        -- keybindings viewer
         'folke/which-key.nvim',
         event = 'VeryLazy',
         opts = {
@@ -57,6 +58,7 @@ local plugins = {
     'windwp/nvim-autopairs',
 
     {
+        -- autocomplete
         'saghen/blink.cmp',
         dependencies = 'rafamadriz/friendly-snippets',
         version = '*',
@@ -87,7 +89,7 @@ local plugins = {
     },
 
     {
-        -- Configurations for Nvim LSP
+        -- language-server configuration
         'neovim/nvim-lspconfig',
         event = { 'BufReadPre', 'BufNewFile' },
         dependencies = {
@@ -115,6 +117,7 @@ local plugins = {
     },
 
     {
+        -- syntax highlighting
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
         event = { 'BufReadPost', 'BufWritePost', 'BufNewFile', 'VeryLazy' },
@@ -157,8 +160,8 @@ local plugins = {
         end
     },
 
-    -- fuzzy finder
     {
+        -- fuzzy finder
         'nvim-telescope/telescope.nvim',
         dependencies = { 'nvim-lua/plenary.nvim' },
         keys = {
@@ -176,8 +179,8 @@ local plugins = {
         },
     },
 
-    -- comment highlighting of TODO, NOTE, etc.
     {
+        -- comment highlighting of TODO, NOTE, etc.
         'folke/todo-comments.nvim',
         event = 'VeryLazy',
         dependencies = 'nvim-lua/plenary.nvim',
@@ -186,6 +189,7 @@ local plugins = {
         },
     },
     {
+        -- language agnostic commenting
         'numToStr/Comment.nvim',
         event = 'VeryLazy',
         opts = {
@@ -203,6 +207,7 @@ local plugins = {
         },
     },
     {
+        -- diagnostics viewer
         'folke/trouble.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons' },
         opts = {
@@ -238,8 +243,8 @@ local plugins = {
     --     dependencies = 'nvim-lua/plenary.nvim',
     -- },
 
-    -- Latex
     {
+        -- latex support
         'lervag/vimtex',
         event = 'VeryLazy',
         -- lazy = false,     -- we don't want to lazy load VimTeX
