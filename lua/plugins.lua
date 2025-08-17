@@ -60,6 +60,7 @@ local plugins = {
         'saghen/blink.cmp',
         dependencies = 'rafamadriz/friendly-snippets',
         version = '*',
+        event = { 'BufWritePost', 'BufNewFile', 'VeryLazy' },
         opts = {
             keymap = { preset = 'super-tab' },
             completion = {
