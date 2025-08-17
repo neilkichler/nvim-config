@@ -22,6 +22,21 @@ keymap('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 keymap('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 keymap('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+local function diagnostic_jump(c)
+    return function()
+        vim.diagnostic.jump({ count = c, float = true })
+        local count = vim.diagnostic.count() -- current buffer
+        print(string.format("E:%d W:%d I:%d H:%d",
+            count[vim.diagnostic.severity.ERROR] or 0,
+            count[vim.diagnostic.severity.WARN] or 0,
+            count[vim.diagnostic.severity.INFO] or 0,
+            count[vim.diagnostic.severity.HINT] or 0))
+    end
+end
+
+keymap("n", "<M-j>", diagnostic_jump(1), { desc = "Jump to next diagnostic" })
+keymap("n", "<M-k>", diagnostic_jump(-1), { desc = "Jump to prev diagnostic" })
+
 -- exit terminal mode
 keymap('t', '<leader><Esc>', [[<C-\><C-n>]], opts)
 
