@@ -144,6 +144,8 @@ local plugins = {
                     additional_vim_regex_highlighting = false,
                 },
 
+                modules = {},
+
                 incremental_selection = {
                     enable = true
                 },
