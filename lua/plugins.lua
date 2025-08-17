@@ -87,12 +87,6 @@ local plugins = {
     },
 
     {
-        'mason-org/mason.nvim',
-        version = '2.*',
-        opts = {}
-    },
-
-    {
         -- Configurations for Nvim LSP
         'neovim/nvim-lspconfig',
         event = { 'BufReadPre', 'BufNewFile' },
