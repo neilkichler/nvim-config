@@ -59,6 +59,13 @@ keymap('t', '<leader><Esc>', [[<C-\><C-n>]], opts)
 -- Don't accidently enter macro mode
 keymap("n", "Q", "<nop>")
 
+-- Make Shift+K behave like normal k in visual mode
+-- (so that I don't accidently ask for man entries)
+keymap("v", "K", "k", opts)
+
+-- Same for J in visual mode
+keymap("v", "J", "j", opts)
+
 -- Run CMake
 keymap("n", "<leader>c", "<cmd>CMakeRun<CR>", { desc = "Run CMake" })
 
