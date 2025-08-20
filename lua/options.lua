@@ -30,15 +30,13 @@ vim.o.autoread       = true
 vim.o.splitbelow     = true
 vim.o.splitright     = true
 
+-- No wrapping of text.
+vim.wo.wrap          = false
+
 -- Copy things from outside of vim.
 vim.schedule(function()
     vim.o.clipboard = 'unnamedplus'
 end)
 
--- No wrapping of text.
-vim.wo.wrap     = false
-
-vim.diagnostic.config {
-    signs = false,
-    virtual_text = false,
-}
+-- Disable diagnostic symbols on the sidebar.
+vim.diagnostic.config({ signs = false })
