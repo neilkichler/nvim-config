@@ -8,6 +8,9 @@ vim.o.hlsearch       = false
 -- Enable break indent.
 vim.o.breakindent    = true
 
+-- Use treesitter for indentation.
+vim.o.smartindent    = false
+
 -- Case insensitive searching unless /C or capital in search.
 vim.o.ignorecase     = true
 vim.o.smartcase      = true

@@ -152,6 +152,10 @@ local plugins = {
                 incremental_selection = {
                     enable = true
                 },
+
+                indent = {
+                    enable = true
+                }
             }
         end
     },
