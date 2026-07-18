@@ -43,3 +43,10 @@ end)
 
 -- Disable diagnostic symbols on the sidebar.
 vim.diagnostic.config({ signs = false })
+
+-- Disable continue comments when inserting new lines with 'o'
+vim.api.nvim_create_autocmd("FileType", {
+    callback = function()
+        vim.opt_local.formatoptions:remove({ 'o' })
+    end,
+})
