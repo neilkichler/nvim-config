@@ -170,11 +170,11 @@ local plugins = {
         -- language-server configuration
         'neovim/nvim-lspconfig',
         event = { 'BufReadPre', 'BufNewFile' },
+        build = ":MasonToolsUpdate",
         dependencies = {
             { 'mason-org/mason.nvim',                     version = '2.*' },
             { 'mason-org/mason-lspconfig.nvim',           version = '2.*' },
             { 'WhoIsSethDaniel/mason-tool-installer.nvim' }, -- tree-sitter CLI must be installed system-wide
-            'saghen/blink.cmp',
             {
                 "folke/lazydev.nvim",
                 ft = "lua", -- only load on lua files
@@ -201,44 +201,13 @@ local plugins = {
     {
         -- syntax highlighting
         'nvim-treesitter/nvim-treesitter',
+        branch = 'main',
+        lazy = false,
         build = ':TSUpdate',
-        event = { 'BufReadPost', 'BufWritePost', 'BufNewFile', 'VeryLazy' },
         config = function()
-            require 'nvim-treesitter.configs'.setup {
-                -- A list of parser names, or "all"
-                ensure_installed = { "c", "cpp", "python", "markdown", "markdown_inline" },
-
-                -- Install parsers synchronously (only applied to `ensure_installed`)
-                sync_install = false,
-
-                -- Automatically install missing parsers when entering buffer
-                auto_install = true,
-
-                -- List of parsers to ignore installing (or "all")
-                ignore_install = { "latex" },
-
-                highlight = {
-                    -- `false` will disable the whole extension
-                    enable = true,
-                    -- list of language that will be disabled
-                    disable = { "latex" },
-                    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-                    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-                    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-                    -- Instead of true it can also be a list of languages
-                    additional_vim_regex_highlighting = false,
-                },
-
-                modules = {},
-
-                incremental_selection = {
-                    enable = true
-                },
-
-                indent = {
-                    enable = true
-                }
-            }
+            require('nvim-treesitter').setup({
+                install = { "c", "cpp", "lua", "markdown", "markdown_inline", "python" },
+            })
         end
     },
 
