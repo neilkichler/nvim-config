@@ -119,7 +119,20 @@ local plugins = {
         version = '*',
         event = { 'BufWritePost', 'BufNewFile', 'VeryLazy' },
         opts = {
-            keymap = { preset = 'super-tab' },
+            keymap = {
+                preset = 'default',
+                ['<M-j>'] = {
+                    function(cmp)
+                        if cmp.snippet_active() then
+                            return cmp.select()
+                        else
+                            return cmp.select_and_accept()
+                        end
+                    end,
+                    'select_next',
+                    'fallback' },
+                ['<M-k>'] = { 'select_prev', 'fallback' },
+            },
             completion = {
                 menu = {
                     -- Don't automatically show the completion menu in some scenarios
@@ -133,6 +146,16 @@ local plugins = {
 
                 -- Display a preview of the selected item on the current line
                 ghost_text = { enabled = true },
+
+                -- Don't preselect items in the completion menu
+                list = {
+                    selection = {
+                        preselect = function()
+                            return not require('blink.cmp').is_menu_visible()
+                        end,
+                        auto_insert = true
+                    }
+                }
             },
             sources = {
                 default = { 'lsp', 'path', 'snippets', 'buffer' },
