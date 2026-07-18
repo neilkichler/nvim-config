@@ -171,8 +171,9 @@ local plugins = {
         'neovim/nvim-lspconfig',
         event = { 'BufReadPre', 'BufNewFile' },
         dependencies = {
-            { 'mason-org/mason.nvim',           version = '2.*' },
-            { 'mason-org/mason-lspconfig.nvim', version = '2.*' },
+            { 'mason-org/mason.nvim',                     version = '2.*' },
+            { 'mason-org/mason-lspconfig.nvim',           version = '2.*' },
+            { 'WhoIsSethDaniel/mason-tool-installer.nvim' }, -- tree-sitter CLI must be installed system-wide
             'saghen/blink.cmp',
             {
                 "folke/lazydev.nvim",
@@ -191,6 +192,9 @@ local plugins = {
             -- before setting up the servers.
             require('mason').setup()
             require('mason-lspconfig').setup()
+            require('mason-tool-installer').setup({
+                ensure_installed = { 'tree-sitter-cli' }
+            })
         end
     },
 
