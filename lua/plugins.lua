@@ -80,6 +80,21 @@ local plugins = {
     },
 
     {
+        -- git integration
+        "NeogitOrg/neogit",
+        lazy = true,
+        dependencies = {
+            "sindrets/diffview.nvim",
+            "m00qek/baleia.nvim",
+            "nvim-telescope/telescope.nvim",
+        },
+        cmd = "Neogit",
+        keys = {
+            { "<leader>gg", "<cmd>Neogit<cr>", desc = "Show Neogit UI" }
+        }
+    },
+
+    {
         -- keybindings viewer
         'folke/which-key.nvim',
         event = 'VeryLazy',
