@@ -40,6 +40,46 @@ local plugins = {
     },
 
     {
+        'lewis6991/gitsigns.nvim',
+        opts = {
+            on_attach = function(bufnr)
+                local gs = require("gitsigns")
+
+                local function map(mode, lhs, rhs, desc)
+                    vim.keymap.set(mode, lhs, rhs, {
+                        buffer = bufnr,
+                        silent = true,
+                        desc = desc,
+                    })
+                end
+
+                -- Navigation
+                map("n", "hn", function() gs.nav_hunk('next') end, "Next Hunk")
+                map("n", "hN", function() gs.nav_hunk('prev') end, "Previous Hunk")
+
+                -- Actions
+                map("n", "<leader>hs", gs.stage_hunk, "Stage Hunk")
+                map('v', '<leader>hs', function()
+                    gs.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+                end)
+
+                map("n", "<leader>hr", gs.reset_hunk, "Reset Hunk")
+                map('v', '<leader>hr', function()
+                    gs.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+                end)
+
+                -- Visualization
+                map("n", "<leader>hh", gs.setqflist, "List Hunks")
+                map("n", "<leader>hp", gs.preview_hunk, "Preview Hunk")
+                map("n", "<leader>hb", gs.blame_line, "Blame Line")
+
+                -- Diff
+                map("n", "<leader>hd", gs.diffthis, "Diff This")
+            end,
+        },
+    },
+
+    {
         -- keybindings viewer
         'folke/which-key.nvim',
         event = 'VeryLazy',
