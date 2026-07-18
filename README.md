@@ -9,7 +9,7 @@ The [mason](https://github.com/mason-org/mason.nvim) package manager is used to 
 
 It has some system [requirements](https://github.com/mason-org/mason.nvim?tab=readme-ov-file#requirements), e.g.:
 
-`python`, `pip` (for ruff, etc.)
+`python`, `pip` (for ruff, ty, etc.)
 
 `npm` (for pyright)
 
