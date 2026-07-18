@@ -41,6 +41,7 @@ local plugins = {
 
     {
         'lewis6991/gitsigns.nvim',
+        event = 'VeryLazy',
         opts = {
             on_attach = function(bufnr)
                 local gs = require("gitsigns")
@@ -169,8 +170,6 @@ local plugins = {
     {
         -- language-server configuration
         'neovim/nvim-lspconfig',
-        event = { 'BufReadPre', 'BufNewFile' },
-        build = ":MasonToolsUpdate",
         dependencies = {
             { 'mason-org/mason.nvim',                     version = '2.*' },
             { 'mason-org/mason-lspconfig.nvim',           version = '2.*' },
