@@ -88,5 +88,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         nmap('<leader>i', vim.lsp.buf.hover, 'Hover Documentation')
         nmap('<leader>r', vim.lsp.buf.rename, 'Rename')
         nmap('<leader>f', vim.lsp.buf.format, 'Format')
+        nmap('<leader>a', vim.lsp.buf.code_action, 'Apply Code Action')
     end,
 })
