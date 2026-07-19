@@ -72,8 +72,8 @@ keymap("v", "K", "k", opts)
 -- Same for J in visual mode
 keymap("v", "J", "j", opts)
 
--- Run CMake
-keymap("n", "<leader>c", "<cmd>CMakeRun<CR>", { desc = "Run CMake" })
+-- Run build command
+keymap("n", "<leader>c", "<cmd>OverseerRun<CR>", { desc = "Run Overseer" })
 
 -- Activate LSP keybindings when an LSP attaches to a particular buffer
 vim.api.nvim_create_autocmd("LspAttach", {

@@ -40,6 +40,12 @@ local plugins = {
     },
 
     {
+        'stevearc/overseer.nvim',
+        opts = {
+        },
+    },
+
+    {
         'lewis6991/gitsigns.nvim',
         event = 'VeryLazy',
         opts = {
