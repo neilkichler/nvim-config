@@ -19,7 +19,6 @@ return {
 
         if cmake_root then
             cmd = { "cmake", "--build", "build" }
-            cwd = cmake_root
         elseif script_root then
             cmd = is_windows and { build_script } or { "./" .. build_script }
             cwd = script_root
