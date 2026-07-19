@@ -26,6 +26,7 @@ local function diagnostic_jump(count)
     return function()
         vim.diagnostic.jump({
             count = count,
+            _highest = true,
             on_jump = function(_, diagnostic)
                 if diagnostic then
                     vim.diagnostic.open_float(nil, {
