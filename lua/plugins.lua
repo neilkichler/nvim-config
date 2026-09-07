@@ -303,7 +303,6 @@ local plugins = {
     {
         -- latex support
         'lervag/vimtex',
-        event = 'VeryLazy',
         -- lazy = false,     -- we don't want to lazy load VimTeX
         init = function()
             -- VimTeX configuration goes here
