@@ -298,14 +298,7 @@ local plugins = {
     --     dependencies = 'nvim-lua/plenary.nvim',
     -- },
 
-    {
-        -- latex support
-        'lervag/vimtex',
-        -- lazy = false,     -- we don't want to lazy load VimTeX
-        init = function()
-            -- VimTeX configuration goes here
-        end
-    },
+    'lervag/vimtex',
 }
 
 require('lazy').setup(plugins, {
