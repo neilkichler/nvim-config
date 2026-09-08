@@ -210,9 +210,7 @@ local plugins = {
         lazy = false,
         build = ':TSUpdate',
         config = function()
-            require('nvim-treesitter').setup({
-                install = { "c", "cpp", "lua", "markdown", "markdown_inline", "python" },
-            })
+            require('nvim-treesitter').install({ "c", "cpp", "python" })
         end
     },
 
