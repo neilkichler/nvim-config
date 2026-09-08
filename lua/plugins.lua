@@ -61,8 +61,8 @@ local plugins = {
                 end
 
                 -- Navigation
-                map("n", "hn", function() gs.nav_hunk('next') end, "Next Hunk")
-                map("n", "hN", function() gs.nav_hunk('prev') end, "Previous Hunk")
+                map("n", "<leader>hn", function() gs.nav_hunk('next') end, "Next Hunk")
+                map("n", "<leader>hN", function() gs.nav_hunk('prev') end, "Previous Hunk")
 
                 -- Actions
                 map("n", "<leader>hs", gs.stage_hunk, "Stage Hunk")
